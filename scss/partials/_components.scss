@@ -1,0 +1,310 @@
+// =============================================
+// BROT PANES — Componentes
+// =============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// --- Botones ---
+.btn {
+  @include btn-base;
+
+  &--primary {
+    background: $color-crust;
+    color: $color-white;
+
+    &:hover {
+      background: $color-crust-dark;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($color-crust, 0.35);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-bark;
+    border: 2px solid $color-bark;
+
+    &:hover {
+      background: $color-bark;
+      color: $color-cream;
+    }
+  }
+
+  &--light {
+    background: $color-white;
+    color: $color-bark;
+
+    &:hover {
+      background: $color-cream;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-crust;
+    padding-inline: 0;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: $fs-base;
+
+    &::after {
+      content: ' →';
+      transition: transform $transition-fast;
+      display: inline-block;
+    }
+
+    &:hover::after {
+      transform: translateX(4px);
+    }
+  }
+}
+
+// --- Badge / Etiqueta ---
+.badge {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  font-size: $fs-xs;
+  font-weight: $fw-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: $radius-full;
+  background: $color-wheat;
+  color: $color-bark;
+
+  &--dark {
+    background: $color-bark;
+    color: $color-cream;
+  }
+
+  &--accent {
+    background: $color-crust;
+    color: $color-white;
+  }
+}
+
+// --- Card de Producto ---
+.product-card {
+  @include card-base;
+  background: $color-white;
+
+  &__img-wrap {
+    overflow: hidden;
+
+    img {
+      @include aspect-ratio(4, 3);
+      transition: transform 0.5s $transition-slow;
+    }
+  }
+
+  &:hover &__img-wrap img {
+    transform: scale(1.05);
+  }
+
+  &__body {
+    padding: $space-6;
+
+    h2 {
+      font-size: $fs-lg;
+      margin-bottom: $space-3;
+      @include title-underline;
+    }
+
+    p {
+      font-size: $fs-sm;
+      @include text-truncate(4);
+    }
+  }
+}
+
+// --- Hero section ---
+.hero {
+  position: relative;
+  min-height: calc(100svh - $nav-height);
+  @include flex-center;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba($color-bark, 0.25) 0%,
+        rgba($color-bark, 0.55) 100%
+      );
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    @include container;
+    @include flex-column;
+    align-items: flex-start;
+    gap: $space-6;
+    padding-block: $space-20;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-wheat;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  &__title {
+    @include heading-display;
+    font-size: clamp($fs-3xl, 7vw, $fs-5xl);
+    color: $color-white;
+    max-width: 14ch;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  &__sub {
+    font-size: $fs-md;
+    color: rgba($color-cream, 0.85);
+    max-width: 48ch;
+    line-height: $lh-normal;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  &__cta {
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  @include respond-to('sm') {
+    min-height: 70svh;
+
+    &__title {
+      font-size: $fs-3xl;
+    }
+  }
+}
+
+// --- Section header ---
+.section-header {
+  margin-bottom: $space-12;
+
+  &__label {
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-crust;
+    display: block;
+    margin-bottom: $space-3;
+  }
+
+  h2 {
+    @include heading-section;
+  }
+
+  p {
+    margin-top: $space-4;
+    max-width: 60ch;
+    font-size: $fs-md;
+  }
+
+  &--center {
+    text-align: center;
+
+    &::after { // línea decorativa centrada
+      margin-inline: auto;
+    }
+
+    p {
+      margin-inline: auto;
+    }
+  }
+}
+
+// --- Page hero (páginas interiores) ---
+.page-hero {
+  background: $color-bark;
+  padding-block: $space-20 $space-16;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba($color-crust, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &__inner {
+    @include container;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__label {
+    font-family: $font-body;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $color-crust;
+    display: block;
+    margin-bottom: $space-4;
+  }
+
+  h1 {
+    @include heading-display;
+    font-size: clamp($fs-2xl, 5vw, $fs-4xl);
+    color: $color-cream;
+    max-width: 20ch;
+  }
+
+  p {
+    margin-top: $space-5;
+    font-size: $fs-md;
+    color: rgba($color-cream, 0.7);
+    max-width: 52ch;
+    line-height: $lh-normal;
+  }
+}
+
+// --- Animate on scroll ---
+.fade-up {
+  @include fade-up-init;
+}
+
+// --- Divider decorativo ---
+.divider {
+  width: 64px;
+  height: 3px;
+  background: $color-crust;
+  margin-block: $space-6;
+
+  &--center {
+    margin-inline: auto;
+  }
+}

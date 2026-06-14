@@ -1,0 +1,61 @@
+// =============================================
+// BROT PANES — Reset & Base
+// =============================================
+
+@use 'variables' as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $fs-base;
+  line-height: $lh-normal;
+  color: $color-text;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  line-height: $lh-tight;
+  color: $color-bark;
+}
+
+p {
+  line-height: $lh-loose;
+  color: $color-text-light;
+}
+
+address {
+  font-style: normal;
+}

@@ -1,0 +1,163 @@
+// =============================================
+// BROT PANES — Mixins
+// =============================================
+
+@use 'variables' as *;
+
+// --- Responsive ---
+@mixin respond-to($bp) {
+  @if $bp == 'xs'  { @media (max-width: #{$bp-xs})  { @content; } }
+  @if $bp == 'sm'  { @media (max-width: #{$bp-sm})  { @content; } }
+  @if $bp == 'md'  { @media (max-width: #{$bp-md})  { @content; } }
+  @if $bp == 'lg'  { @media (max-width: #{$bp-lg})  { @content; } }
+  @if $bp == 'xl'  { @media (max-width: #{$bp-xl})  { @content; } }
+}
+
+// --- Flexbox helpers ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// --- Container ---
+@mixin container($max: $max-width) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $space-8;
+
+  @include respond-to('md') {
+    padding-inline: $space-6;
+  }
+
+  @include respond-to('sm') {
+    padding-inline: $space-4;
+  }
+}
+
+// --- Tipografía display ---
+@mixin heading-display {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  line-height: $lh-tight;
+  color: $color-bark;
+  letter-spacing: -0.02em;
+}
+
+@mixin heading-section {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  font-size: $fs-2xl;
+  line-height: $lh-snug;
+  color: $color-bark;
+
+  @include respond-to('md') {
+    font-size: $fs-xl;
+  }
+}
+
+// --- Botón base ---
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-8;
+  font-family: $font-body;
+  font-size: $fs-sm;
+  font-weight: $fw-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base;
+  border-radius: $radius-sm;
+}
+
+// --- Overlay oscuro sobre imagen ---
+@mixin img-overlay($opacity: 0.4) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($color-bark, $opacity);
+    pointer-events: none;
+  }
+}
+
+// --- Línea decorativa bajo título ---
+@mixin title-underline($color: $color-crust) {
+  position: relative;
+  padding-bottom: $space-4;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: $color;
+  }
+}
+
+// --- Texto truncado con ellipsis ---
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// --- Card base ---
+@mixin card-base {
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: box-shadow $transition-base, transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-4px);
+  }
+}
+
+// --- Animación fade-up al hacer scroll ---
+@mixin fade-up-init {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s $transition-slow, transform 0.7s $transition-slow;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// --- Aspect ratio ---
+@mixin aspect-ratio($w, $h) {
+  aspect-ratio: #{$w} / #{$h};
+  object-fit: cover;
+  width: 100%;
+}

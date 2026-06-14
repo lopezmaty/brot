@@ -1,0 +1,51 @@
+// =============================================
+// BROT PANES — style.scss (entrada principal)
+// =============================================
+// Estructura de imports con @use y @forward
+// Compilar con: sass scss/style.scss CSS/style.css --style=compressed
+
+@use 'partials/variables'   as *;
+@use 'partials/mixins'      as *;
+@use 'partials/reset';
+@use 'partials/animations';
+@use 'partials/components';
+@use 'partials/navbar';
+@use 'partials/footer';
+@use 'partials/pages';
+
+// Google Fonts se importan desde el <head> de cada HTML
+// para evitar el bloqueo de renderizado
+
+// =============================================
+// Utilidades globales
+// =============================================
+
+.container {
+  @include container;
+}
+
+.section {
+  padding-block: $space-20;
+
+  @include respond-to('md') {
+    padding-block: $space-12;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center { text-align: center; }
+.text-left   { text-align: left;   }
+
+.mt-auto { margin-top: auto; }
+.mx-auto { margin-inline: auto; }

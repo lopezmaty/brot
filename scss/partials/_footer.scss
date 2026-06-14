@@ -1,0 +1,130 @@
+// =============================================
+// BROT PANES — Footer
+// =============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  background: $color-bark;
+  color: $color-cream;
+  padding-block: $space-16 $space-8;
+
+  &__inner {
+    @include container;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: $space-12;
+    padding-bottom: $space-12;
+    border-bottom: 1px solid rgba($color-cream, 0.12);
+
+    @include respond-to('lg') {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond-to('sm') {
+      grid-template-columns: 1fr;
+      gap: $space-8;
+    }
+  }
+
+  &__brand {
+    @include flex-column;
+    gap: $space-4;
+
+    img {
+      height: 52px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    p {
+      font-size: $fs-sm;
+      color: rgba($color-cream, 0.6);
+      line-height: $lh-normal;
+    }
+  }
+
+  &__nav {
+    h4 {
+      font-family: $font-body;
+      font-size: $fs-xs;
+      font-weight: $fw-bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: $color-crust;
+      margin-bottom: $space-5;
+    }
+
+    ul {
+      @include flex-column;
+      gap: $space-3;
+
+      a {
+        font-size: $fs-sm;
+        color: rgba($color-cream, 0.7);
+        transition: color $transition-fast;
+
+        &:hover {
+          color: $color-cream;
+        }
+      }
+    }
+  }
+
+  &__contact {
+    h4 {
+      font-family: $font-body;
+      font-size: $fs-xs;
+      font-weight: $fw-bold;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: $color-crust;
+      margin-bottom: $space-5;
+    }
+
+    address {
+      @include flex-column;
+      gap: $space-3;
+
+      a, p, span {
+        font-size: $fs-sm;
+        color: rgba($color-cream, 0.7);
+        transition: color $transition-fast;
+
+        &:hover {
+          color: $color-cream;
+        }
+      }
+    }
+  }
+
+  &__qr {
+    margin-top: $space-5;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: $radius-md;
+      opacity: 0.85;
+    }
+  }
+
+  &__bottom {
+    @include container;
+    @include flex-between;
+    padding-top: $space-8;
+
+    @include respond-to('sm') {
+      flex-direction: column;
+      gap: $space-3;
+      text-align: center;
+    }
+
+    p {
+      font-size: $fs-xs;
+      color: rgba($color-cream, 0.4);
+    }
+  }
+}

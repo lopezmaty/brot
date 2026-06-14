@@ -1,0 +1,533 @@
+// =============================================
+// BROT PANES — Estilos por página
+// =============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ============= INDEX =============
+.index {
+
+  // Galería de fotos —  3 columnas
+  &__gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+
+    @include respond-to('sm') {
+      grid-template-columns: 1fr;
+    }
+
+    img {
+      @include aspect-ratio(1, 1);
+      transition: transform 0.5s $transition-slow;
+      filter: saturate(0.9);
+
+      &:hover {
+        transform: scale(1.02);
+        filter: saturate(1.1);
+      }
+    }
+  }
+
+  // Sección Nosotros en index
+  &__about {
+    padding-block: $space-24;
+    background: $color-white;
+
+    &-inner {
+      @include container;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-16;
+      align-items: center;
+
+      @include respond-to('lg') {
+        grid-template-columns: 1fr;
+        gap: $space-10;
+      }
+    }
+
+    &-img {
+      position: relative;
+      border-radius: $radius-lg;
+      overflow: hidden;
+      box-shadow: $shadow-lg;
+
+      img {
+        @include aspect-ratio(4, 5);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border: 2px solid $color-crust;
+        border-radius: $radius-lg;
+        z-index: -1;
+        transform: translate(12px, 12px);
+      }
+    }
+
+    &-text {
+      @include flex-column;
+      gap: $space-6;
+
+      h2 {
+        @include heading-section;
+        @include title-underline;
+      }
+
+      p {
+        font-size: $fs-md;
+        line-height: $lh-loose;
+      }
+    }
+  }
+
+  // Stats / Números
+  &__stats {
+    background: $color-bark;
+    padding-block: $space-16;
+
+    &-inner {
+      @include container;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $space-8;
+      text-align: center;
+
+      @include respond-to('md') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include respond-to('xs') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &-item {
+      @include flex-column;
+      align-items: center;
+      gap: $space-2;
+
+      strong {
+        font-family: $font-display;
+        font-size: $fs-3xl;
+        color: $color-crust;
+        line-height: 1;
+      }
+
+      span {
+        font-size: $fs-sm;
+        color: rgba($color-cream, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+    }
+  }
+}
+
+// ============= CATÁLOGO =============
+.catalogo {
+
+  &__grid {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-8;
+    padding-block: $space-16;
+
+    @include respond-to('lg') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to('sm') {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// ============= FAQs =============
+.faqs {
+
+  &__list {
+    @include container($max: $max-width-md);
+    padding-block: $space-16;
+    @include flex-column;
+    gap: $space-4;
+  }
+
+  &__item {
+    background: $color-white;
+    border-radius: $radius-md;
+    border: $border-thin;
+    overflow: hidden;
+    transition: box-shadow $transition-base;
+
+    &:hover {
+      box-shadow: $shadow-sm;
+    }
+
+    &.open {
+      .faqs__answer {
+        max-height: 400px;
+        padding-block: $space-5;
+      }
+
+      .faqs__icon {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__question {
+    @include flex-between;
+    padding: $space-5 $space-6;
+    cursor: pointer;
+    user-select: none;
+
+    h2 {
+      font-family: $font-body;
+      font-size: $fs-base;
+      font-weight: $fw-medium;
+      color: $color-bark;
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-full;
+    background: $color-wheat;
+    @include flex-center;
+    flex-shrink: 0;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: $color-bark;
+    transition: transform $transition-base, background $transition-fast;
+
+    .faqs__item.open & {
+      background: $color-crust;
+      color: $color-white;
+    }
+  }
+
+  &__answer {
+    max-height: 0;
+    overflow: hidden;
+    padding-inline: $space-6;
+    transition: max-height 0.4s ease, padding $transition-base;
+
+    p {
+      font-size: $fs-sm;
+      padding-bottom: $space-5;
+      border-top: $border-thin;
+      padding-top: $space-4;
+    }
+  }
+}
+
+// ============= CONTACTO =============
+.contacto {
+
+  &__layout {
+    @include container;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: $space-16;
+    padding-block: $space-16;
+    align-items: start;
+
+    @include respond-to('lg') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__info {
+    @include flex-column;
+    gap: $space-8;
+
+    h2 {
+      @include heading-section;
+    }
+
+    p {
+      font-size: $fs-md;
+    }
+  }
+
+  &__details {
+    @include flex-column;
+    gap: $space-5;
+
+    &-item {
+      display: flex;
+      gap: $space-4;
+      align-items: flex-start;
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        background: $color-wheat;
+        border-radius: $radius-md;
+        @include flex-center;
+        flex-shrink: 0;
+        font-size: $fs-md;
+      }
+
+      div {
+        @include flex-column;
+        gap: $space-1;
+
+        span {
+          font-size: $fs-xs;
+          font-weight: $fw-bold;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: $color-crust;
+        }
+
+        a, p {
+          font-size: $fs-sm;
+          color: $color-bark;
+          transition: color $transition-fast;
+
+          &:hover { color: $color-crust; }
+        }
+      }
+    }
+  }
+
+  // Form
+  &__form {
+    background: $color-white;
+    padding: $space-10;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+
+    @include respond-to('sm') {
+      padding: $space-6;
+    }
+
+    h3 {
+      font-size: $fs-xl;
+      margin-bottom: $space-8;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-5;
+
+      @include respond-to('xs') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      @include flex-column;
+      gap: $space-2;
+      margin-bottom: $space-5;
+
+      label {
+        font-size: $fs-xs;
+        font-weight: $fw-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $color-smoke;
+      }
+
+      input,
+      textarea {
+        padding: $space-3 $space-4;
+        border: 2px solid $color-wheat;
+        border-radius: $radius-md;
+        background: $color-cream;
+        color: $color-bark;
+        font-size: $fs-base;
+        transition: border-color $transition-fast, box-shadow $transition-fast;
+        outline: none;
+        resize: vertical;
+
+        &:focus {
+          border-color: $color-crust;
+          box-shadow: 0 0 0 4px rgba($color-crust, 0.12);
+        }
+
+        &::placeholder {
+          color: rgba($color-bark, 0.3);
+        }
+      }
+
+      textarea {
+        min-height: 140px;
+      }
+    }
+  }
+}
+
+// ============= NOSOTROS =============
+.nosotros {
+
+  &__intro {
+    padding-block: $space-20;
+    background: $color-white;
+
+    &-inner {
+      @include container;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-16;
+      align-items: center;
+
+      @include respond-to('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &-text {
+      @include flex-column;
+      gap: $space-6;
+
+      h2 { @include heading-section; }
+      p  { font-size: $fs-md; line-height: $lh-loose; }
+    }
+
+    &-img {
+      border-radius: $radius-lg;
+      overflow: hidden;
+      box-shadow: $shadow-lg;
+
+      img { @include aspect-ratio(4, 5); }
+    }
+  }
+
+  &__values {
+    padding-block: $space-20;
+    background: $color-cream;
+
+    &-inner {
+      @include container;
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: $space-6;
+
+      @include respond-to('md') {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include respond-to('xs') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &-card {
+      background: $color-white;
+      padding: $space-8;
+      border-radius: $radius-lg;
+      border-top: 3px solid $color-crust;
+      box-shadow: $shadow-sm;
+      transition: box-shadow $transition-base, transform $transition-base;
+
+      &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-4px);
+      }
+
+      .icon {
+        font-size: $fs-2xl;
+        margin-bottom: $space-4;
+      }
+
+      h3 {
+        font-size: $fs-lg;
+        margin-bottom: $space-3;
+      }
+
+      p {
+        font-size: $fs-sm;
+      }
+    }
+  }
+
+  &__timeline {
+    padding-block: $space-20;
+    background: $color-bark;
+
+    &-inner {
+      @include container($max: $max-width-md);
+    }
+
+    .section-header {
+      h2 { color: $color-cream; }
+    }
+
+    &-list {
+      position: relative;
+      @include flex-column;
+      gap: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: rgba($color-crust, 0.3);
+      }
+    }
+
+    &-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: $space-6;
+      padding-bottom: $space-10;
+
+      .dot {
+        width: 44px;
+        height: 44px;
+        border-radius: $radius-full;
+        background: $color-crust;
+        @include flex-center;
+        flex-shrink: 0;
+        font-family: $font-display;
+        font-weight: $fw-bold;
+        font-size: $fs-sm;
+        color: $color-white;
+        position: relative;
+        z-index: 1;
+      }
+
+      .content {
+        padding-top: $space-2;
+
+        year {
+          display: block;
+          font-size: $fs-xs;
+          font-weight: $fw-bold;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: $color-crust;
+          margin-bottom: $space-2;
+        }
+
+        h3 {
+          font-size: $fs-lg;
+          color: $color-cream;
+          margin-bottom: $space-3;
+        }
+
+        p {
+          font-size: $fs-sm;
+          color: rgba($color-cream, 0.65);
+          line-height: $lh-normal;
+        }
+      }
+    }
+  }
+}
